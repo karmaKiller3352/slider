@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "deploy": "sudo sh deploy.sh",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

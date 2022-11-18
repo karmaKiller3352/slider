@@ -2,11 +2,11 @@
 
 # abort on errors
 set -e
-
+DOCS=docs
 # build
 yarn run build
+test -f docs && rm -R docs
 
-rm -R docs
 mv dist docs
 git add .
 git commit -m 'deploy'
