@@ -6,8 +6,8 @@ DOCS=docs
 # build
 yarn run build
 test -f docs && rm -R docs
-
-mv dist docs
+rm -R docs
+mv -f dist docs
 git add .
 git commit -m 'deploy'
 git push origin dev --force

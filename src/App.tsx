@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import styled, { css } from "styled-components";
+import styled, { createGlobalStyle, css } from "styled-components";
 
 type ImageType = {
   title: string;
@@ -12,7 +12,7 @@ type SliderType = {
 
 const SliderWrapper = styled.div`
   width: 100%;
-  height: 500px;
+  height: 100vh;
   display: flex;
   position: relative;
 `;
@@ -21,7 +21,7 @@ const LeftControl = styled.div`
   position: absolute;
   left: 0;
   width: 40px;
-  height: 500px;
+  height: 100vh;
   top: 0;
   bottom: 0;
   z-index: 10;
@@ -36,7 +36,7 @@ const RightControl = styled.div`
   position: absolute;
   right: 0;
   width: 40px;
-  height: 500px;
+  height: 100vh;
   top: 0;
   bottom: 0;
   z-index: 10;
@@ -49,7 +49,7 @@ const RightControl = styled.div`
 
 const ImageViewport = styled.div`
   width: 400%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-wrap: nowrap;
   position: relative;
@@ -79,6 +79,17 @@ const Slide = styled.div<{ src: string }>`
   `}
 `;
 
+const GlobalStyles = createGlobalStyle`
+  html {
+    overflow: hidden;
+  }
+
+  body {
+    margin: 0%;
+    padding: 0;
+  }
+`;
+
 const images: ImageType[] = [
   {
     title: "Image 1",
@@ -98,7 +109,7 @@ const images: ImageType[] = [
   },
 ];
 
-const getImgSrc = (id: number) => `https://picsum.photos/id/${id}/1000/500`;
+const getImgSrc = (id: number) => `https://picsum.photos/id/${id}/1000/900`;
 
 const Slider: FC<SliderType> = ({ images }) => {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -146,9 +157,12 @@ const Slider: FC<SliderType> = ({ images }) => {
 
 function App() {
   return (
-    <div className="App">
-      <Slider images={images} />
-    </div>
+    <>
+      <GlobalStyles />
+      <div className="App">
+        <Slider images={images} />
+      </div>
+    </>
   );
 }
 
